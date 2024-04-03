@@ -1,0 +1,91 @@
+package Tiendaonline;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Clase principal que representa una tienda online.
+ * Permite agregar productos al carrito y realizar el pago.
+ */
+public class TiendaOnline {
+    public static void main(String[] args) {
+        Carrito carrito = new Carrito();
+        
+        // Agregar productos al carrito
+        carrito.agregarProducto(new Producto("Camiseta", 20));
+        carrito.agregarProducto(new Producto("Pantalón", 30));
+        
+        // Realizar el pago
+        carrito.pagar();
+    }
+}
+
+/**
+ * Clase que representa un producto en la tienda online.
+ */
+class Producto {
+    private String nombre;
+    private double precio;
+
+    /**
+     * Constructor de la clase Producto.
+     *
+     * @param nombre Nombre del producto.
+     * @param precio Precio del producto.
+     */
+    public Producto(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+
+    /**
+     * Obtiene el nombre del producto.
+     *
+     * @return El nombre del producto.
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Obtiene el precio del producto.
+     *
+     * @return El precio del producto.
+     */
+    public double getPrecio() {
+        return precio;
+    }
+}
+
+/**
+ * Clase que representa el carrito de compras en la tienda online.
+ */
+class Carrito {
+    private List<Producto> productos;
+
+    /**
+     * Constructor de la clase Carrito.
+     */
+    public Carrito() {
+        this.productos = new ArrayList<>();
+    }
+
+    /**
+     * Agrega un producto al carrito.
+     *
+     * @param producto Producto a agregar al carrito.
+     */
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+        System.out.println("Producto agregado al carrito: " + producto.getNombre());
+    }
+
+    /**
+     * Realiza el pago de los productos en el carrito.
+     */
+    public void pagar() {
+        double total = productos.stream().mapToDouble(Producto::getPrecio).sum();
+        System.out.println("Total a pagar: " + total);
+        // Lógica para realizar el pago
+    }
+}
